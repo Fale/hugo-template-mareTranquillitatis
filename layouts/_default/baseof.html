@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+        {{ hugo.Generator }}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ .Site.BaseURL }}/index.xml">
+        <style nonce="style">
+        {{ with resources.Get "css/theme.css" | minify }}{{ .Content | safeCSS }}{{ end }}
+        {{ with resources.Get "css/syntax.css" | minify }}{{ .Content | safeCSS }}{{ end }}
+        {{ with resources.Get "css/site.css" | minify }}{{ .Content | safeCSS }}{{ end }}
+        </style>
+    </head>
+    <body>
+        <header>
+            <a id="brand" href="/">
+                {{ if .Site.Params.Avatar }}<img class="avatar" src="{{ .Site.Params.Avatar }}" alt="Avatar">{{ end }}
+                {{ .Site.Title }}
+            </a>
+            {{- if .Site.Menus.top }}
+            <nav>
+                {{- range .Site.Menus.top }}
+                <a {{ if hasPrefix $.RelPermalink .URL }}class="active"{{ end }} href="{{ .URL }}">{{ .Name }}</a>
+                {{- end }}
+            </nav>
+            {{- end }}
+        </header>
+        <main>
+            {{ block "main" . }}{{ end }}
+        </main>
+        <aside id="sidebar">
+        {{- if .Site.Menus.social }}
+            <div class="card">
+                <h1>Social networks</h1>
+                <ul>
+                    {{- range .Site.Menus.social }}
+                    <a href="{{ .URL }}" title="{{ .Name }}"><li>{{ .Pre }}{{ .Name }}</li></a>
+                    {{- end }}
+                </ul>
+            </div>
+        {{- end }}
+        {{- range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+        {{- if in $.Site.Params.TaxonomiesInSidebar $taxonomyname }}
+            <div class="card">
+                <h1>{{ $taxonomyname }}</h1>
+                <ul class="list-group">
+                    {{- range $taxonomy }}
+                    <a href="{{ .Page.RelPermalink }}" title="{{ .Page.Title }}"><li>{{ .Page.Title }}</li></a>
+                    {{- end }}
+                </ul>
+            </div>
+        {{- end }}
+        {{- end }}
+        </aside>
+        <footer>
+            <p>
+                <span id="copyright">&copy;</span> {{ .Site.Params.LaunchYear }}-{{ .Site.LastChange.Year }} {{ .Site.Params.Author.Name }}. {{ .Site.Params.Copyright }} <br />
+                <a href="/privacy-policy">Privacy policy</a>
+            </p>
+        </footer>
+    </body>
+</html>
