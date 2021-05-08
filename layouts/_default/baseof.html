@@ -5,7 +5,7 @@
         <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
         {{ hugo.Generator }}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
         <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ .Site.BaseURL }}/index.xml">
@@ -38,7 +38,7 @@
                 <h1>Social networks</h1>
                 <ul>
                     {{- range .Site.Menus.social }}
-                    <a href="{{ .URL }}" title="{{ .Name }}"><li>{{ .Pre }}{{ .Name }}</li></a>
+                    <li><a href="{{ .URL }}" title="{{ .Name }}">{{ .Pre }}{{ .Name }}</a></li>
                     {{- end }}
                 </ul>
             </div>
@@ -49,7 +49,7 @@
                 <h1>{{ $taxonomyname }}</h1>
                 <ul class="list-group">
                     {{- range $taxonomy }}
-                    <a href="{{ .Page.RelPermalink }}" title="{{ .Page.Title }}"><li>{{ .Page.Title }}</li></a>
+                    <li><a href="{{ .Page.RelPermalink }}" title="{{ .Page.Title }}">{{ .Page.Title }}</a></li>
                     {{- end }}
                 </ul>
             </div>
