@@ -276,7 +276,7 @@ footer p {
     nav a {
         width: calc(100% - 40px);
         padding: 12px 20px !important;
-        border: 1px solid rgba(0,0,0,.125);
+        border-top: 1px solid rgba(0,0,0,.125);
     }
 
     aside#sidebar ul {
@@ -287,6 +287,6 @@ footer p {
     aside#sidebar li {
         display: block;
         padding: .75rem 1.25rem;
-        border: 1px solid rgba(0,0,0,.125);
+        border-top: 1px solid rgba(0,0,0,.125);
     }
 }
