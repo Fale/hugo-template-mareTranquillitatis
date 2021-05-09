@@ -187,14 +187,16 @@ main code {
     word-break: break-word;
 }
 
-main pre.chroma {
+main pre {
     padding: 5px;
     overflow: auto;
-    background-color: #F8F8F8;
+    background-color: #F8F8F8 !important;
 }
 
 main pre code {
     color: inherit;
+    width: 1px;
+    display: inline-block;
 }
 
 main section h2 {
