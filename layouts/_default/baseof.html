@@ -2,18 +2,100 @@
 <html lang="{{ .Site.LanguageCode }}">
     <head>
         <meta charset="utf-8">
-        <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+        <title>{{ if ne .Page.RelPermalink "/" }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
         {{ hugo.Generator }}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
         <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ .Site.BaseURL }}/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ "index.xml" | absURL }}">
         <style nonce="style">
         {{ with resources.Get "css/theme.css" | minify }}{{ .Content | safeCSS }}{{ end }}
         {{ with resources.Get "css/syntax.css" | minify }}{{ .Content | safeCSS }}{{ end }}
         {{ with resources.Get "css/site.css" | minify }}{{ .Content | safeCSS }}{{ end }}
         </style>
+        {{ template "_internal/twitter_cards.html" . }}
+        {{ template "_internal/opengraph.html" . }}
+        {{ block "jsonld" . }}
+        {{ if .IsHome }}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@id": {{ .Site.Author.schemaidi }},
+                "@type": "Person",
+                "name": {{ .Site.Author.name }},
+                "givenName": {{ .Site.Author.givenname }},
+                "familyName": {{ .Site.Author.familyname }},
+                "birthdate": {{ .Site.Author.birthdate }},
+                "url": {{ .Site.Author.url }},
+                "image": {{ .Site.Author.image | absURL }},
+                "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
+                "jobTitle": {{ .Site.Author.jobtitle }},
+                "hasOccupation": [
+                {{- range $c, $item := .Site.Author.hasoccupation }}
+                    {{if $c }},{{ end}}{
+                        "@type": "Occupation",
+                        "name": {{ $item.Name }},
+                        "occupationalCategory": {
+                            "@type": "CategoryCode",
+                            "codeValue": {{ $item.CodeValue }},
+                            "name": {{ $item.CodeName }},
+                            "url": "https://www.onetonline.org/link/summary/{{ $item.CodeValue }}"
+                        }
+                    }
+                {{- end }}
+                ]
+            }
+        </script>
+        {{ end }}
+        {{ if (and (eq .Section "post") (.IsPage)) }}
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "@id": {{ .Permalink }},
+                "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }},
+                "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }},
+                "name": {{ .Title }},
+                "headline": {{ .Params.title }},
+                "abstract": {{ .Summary }},
+                "url": {{ .Permalink }},
+                "image": {{ .Params.Image | absURL }},
+                "inLanguage": {{ .Site.LanguageCode }},
+                "copyrightHolder": {{ .Site.Author.name }},
+                "copyrightYear": {{ .Date.Format "2006" }},
+                "wordCount": {{ .WordCount }},
+                "keywords": [{{ range $c, $item := .Params.tags }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
+                "author": {
+                    "@type": "Person",
+                    "mainEntityOfPage": {{ .Site.Author.schemaid }},
+                    "name": {{ .Site.Author.name }},
+                    "givenName": {{ .Site.Author.givenname }},
+                    "familyName": {{ .Site.Author.familyname }},
+                    "birthdate": {{ .Site.Author.birthdate }},
+                    "url": {{ .Site.Author.url }},
+                    "image": {{ .Site.Author.image | absURL }},
+                    "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
+                    "jobTitle": {{ .Site.Author.jobtitle }},
+                    "hasOccupation": [
+                    {{- range $c, $item := .Site.Author.hasoccupation }}
+                        {{if $c }},{{ end}}{
+                            "@type": "Occupation",
+                            "name": {{ $item.Name }},
+                            "occupationalCategory": {
+                                "@type": "CategoryCode",
+                                "codeValue": {{ $item.CodeValue }},
+                                "name": {{ $item.CodeName }},
+                                "url": "https://www.onetonline.org/link/summary/{{ $item.CodeValue }}"
+                            }
+                        }
+                    {{- end }}
+                    ]
+                }
+            }
+        </script>
+        {{ end }}
+        {{ end }}
     </head>
     <body>
         <header>

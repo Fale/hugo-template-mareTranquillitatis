@@ -1,16 +1,8 @@
 {{ define "main" }}
-    {{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") }}
-    {{- range $paginator.Pages }}
-    <article class="card">
-        {{ if .Params.Image }}<img class="cover" src="{{ .Params.Image }}" alt="">{{ end }}
-        <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
-        <p>
-            <span class="fas fa-fw">&#xf017;</span> {{ $.Date.Format "January 2, 2006" }} {{ if .Params.location }} - <span class="fas">&#xf0ac;</span> {{ .Params.location.city }}, {{ .Params.location.country }}{{ end }}
-        </p>
-        <p>{{ .Summary }}</p>
-        <a class="button" href="{{ .RelPermalink }}">Read More <span class="fas">&#xf054;</span></a>
-    </article>
-    {{- end }}
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") }}
+    {{ range $paginator.Pages }}
+    {{ .Render "li" }}
+    {{ end }}
     {{- if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
     <div class="card">
         {{- if .Paginator.HasNext }}
