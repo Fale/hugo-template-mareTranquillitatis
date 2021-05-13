@@ -1,5 +1,5 @@
 {{ define "main" }}
-<article class="card" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<article class="card">
     {{ if .Params.Image }}<img class="cover" src="{{ .Params.Image }}" alt="">{{ end }}
     <h1>{{ .Title }}</h1>
     <p>{{ if not .Date.IsZero }}<span class="fas fa-fw">&#xf017;</span> {{ $.Date.Format "January 2, 2006" }}{{ end }} {{ if .Params.location }} - <span class="fas">&#xf0ac;</span> {{ .Params.location.city }}, {{ .Params.location.country }}{{ end }}
@@ -21,10 +21,10 @@
     <aside>
         <section id="share">
             <h2>Share</h2>
-            <a target="_blank" href="http://www.facebook.com/sharer.php?src=bm&u={{ .Permalink }}&t={{ .Title }}"><span class="fab fa-fw">&#xf09a;</span></a>
-            <a target="_blank" href="http://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}&tw_p=tweetbutton"><span class="fab fa-fw">&#xf099;</span></a>
-            <a target="_blank" href="http://getpocket.com/edit?url={{ .Permalink }}&title={{ .Title }}"><span class="fab fa-fw">&#xf265;</span></a>
-            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}"><span class="fab fa-fw">&#xf08c;</span></a>
+            <a target="_blank" href="http://www.facebook.com/sharer.php?src=bm&u={{ substr .Permalink 0 -1 }}&t={{ .Title }}"><span class="fab fa-fw">&#xf09a;</span></a>
+            <a target="_blank" href="http://twitter.com/intent/tweet?url={{ substr .Permalink 0 -1 }}&text={{ .Title }}&tw_p=tweetbutton"><span class="fab fa-fw">&#xf099;</span></a>
+            <a target="_blank" href="http://getpocket.com/edit?url={{ substr .Permalink 0 -1 }}&title={{ .Title }}"><span class="fab fa-fw">&#xf265;</span></a>
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ substr .Permalink 0 -1 }}&title={{ .Title }}"><span class="fab fa-fw">&#xf08c;</span></a>
         </section>
 
         <section id="see-also">
@@ -33,7 +33,7 @@
             <h2>See Also</h2>
             <ul>
                 {{ range . }}
-                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                <li><a href="{{ substr .RelPermalink 0 -1 }}">{{ .Title }}</a></li>
                 {{ end }}
             </ul>
             {{ end }}
@@ -41,7 +41,7 @@
 
         {{ if not (isset .Params "no_comments") }}
         <section id="comments">
-            {{ $resource := (replace (substr .RelPermalink "1" "-1") "/" "_") }}
+            {{ $resource := (replace (substr .RelPermalink 1 -1) "/" "_") }}
             <h2 id="say-something">Say something</h2>
             <form id="comment">
                 <input type="hidden" id="comment-resource" value="{{ $resource }}">

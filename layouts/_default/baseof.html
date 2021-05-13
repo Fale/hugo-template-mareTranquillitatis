@@ -53,13 +53,13 @@
             {
                 "@context": "https://schema.org",
                 "@type": "Article",
-                "@id": {{ .Permalink }},
+                "@id": {{ substr .Permalink 0 -1 }},
                 "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }},
                 "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }},
                 "name": {{ .Title }},
                 "headline": {{ .Params.title }},
                 "abstract": {{ .Summary }},
-                "url": {{ .Permalink }},
+                "url": {{ substr .Permalink 0 -1 }},
                 "image": {{ .Params.Image | absURL }},
                 "inLanguage": {{ .Site.LanguageCode }},
                 "copyrightHolder": {{ .Site.Author.name }},
@@ -105,8 +105,9 @@
             </a>
             {{- if .Site.Menus.top }}
             <nav>
+                {{- $prefix := $.RelPermalink -}}{{- if gt (len $prefix) 1 -}}{{- $prefix := substr $prefix 0 -1 -}}{{- end -}}
                 {{- range .Site.Menus.top }}
-                <a {{ if hasPrefix $.RelPermalink .URL }}class="active"{{ end }} href="{{ .URL }}">{{ .Name }}</a>
+                <a {{ if hasPrefix $prefix .URL }}class="active"{{ end }} href="{{ .URL }}">{{ .Name }}</a>
                 {{- end }}
             </nav>
             {{- end }}
@@ -131,7 +132,7 @@
                 <h1>{{ $taxonomyname }}</h1>
                 <ul class="list-group">
                     {{- range $taxonomy }}
-                    <li><a href="{{ .Page.RelPermalink }}" title="{{ .Page.Title }}">{{ .Page.Title }}</a></li>
+                    <li><a href="{{ substr .Page.RelPermalink 0 -1 }}" title="{{ .Page.Title }}">{{ .Page.Title }}</a></li>
                     {{- end }}
                 </ul>
             </div>
