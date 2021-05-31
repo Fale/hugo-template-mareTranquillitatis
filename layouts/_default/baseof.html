@@ -103,6 +103,7 @@
                 {{ if .Site.Params.Avatar }}<img class="avatar" src="{{ .Site.Params.Avatar }}" alt="Avatar">{{ end }}
                 {{ .Site.Title }}
             </a>
+            <span id="nav-toggler" class="fas fa-fw">&#xf0c9;</span>
             {{- if .Site.Menus.top }}
             <nav>
                 {{- $prefix := $.RelPermalink -}}{{- if gt (len $prefix) 1 -}}{{- $prefix := substr $prefix 0 -1 -}}{{- end -}}
@@ -145,5 +146,6 @@
                 <a href="/privacy-policy">Privacy policy</a>
             </p>
         </footer>
+        {{ with resources.Get "js/mobile.js" | resources.ExecuteAsTemplate "mobile.js" . | minify }}<script nonce="js">{{ .Content | safeJS }}</script>{{ end }}
     </body>
 </html>

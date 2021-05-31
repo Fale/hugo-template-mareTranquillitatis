@@ -133,11 +133,20 @@ header img.avatar {
 
 header #brand {
     display: inline-block;
-    color: rgba(0, 0, 0, 0.9);
+    color: #212529;
     white-space: normal;
     font-size: 1.25rem;
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
+}
+
+header span#nav-toggler {
+    display: none;
+    padding: .3rem .4rem;
+    color: #CCCCCC;
+    border: 1px solid #DED4DA;
+    border-radius: .25rem;
+    cursor: pointer;
 }
 
 header nav {
@@ -148,19 +157,20 @@ header nav a {
     float: left;
     display: block;
     padding: 0.2rem .5rem 0 .5rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: #777777;
 }
 
 header a.active,
 header a:hover {
     text-decoration: none;
-    color: rgba(0, 0, 0, 0.9);
+    color: #212529;
 }
 
 /* Content */
 main {
     max-width: 730px;
-    flex: 1 100%;
+    flex: 3 0px;
+    margin-right: 10px;
 }
 
 main article img.cover {
@@ -230,7 +240,8 @@ main section#comments textarea {
 
 /* Sidebar */
 aside#sidebar {
-    flex: 1 100%;
+    flex: 1 0px;
+    margin-left: 10px;
 }
 
 aside#sidebar h1 {
@@ -258,33 +269,34 @@ footer p {
     margin: 0;
 }
 
-/* Responsive */
-@media all and (min-width: 655px) {
-    main { 
-        flex: 3 0px;
-        margin-right: 10px;
-    }
-
-    aside#sidebar {
-        flex: 1 0px;
-        margin-left: 10px;
-    }
-}
-
 @media all and (max-width: 654px) {
     nav {
         margin: 10px -15px -10px -15px;
         width: calc(100% + 30px);
     }
 
-    header span#toggler {
+    header span#nav-toggler {
         display: inline-block;
     }
 
-    nav a {
+    header nav {
+        display: none;
+    }
+
+    header nav a {
         width: calc(100% - 40px);
         padding: 12px 20px !important;
-        border-top: 1px solid rgba(0,0,0,.125);
+        border-top: 1px solid #DED4DA;
+    }
+
+    main {
+        flex: 1 100%;
+        margin-right: 0;
+    }
+
+    aside#sidebar {
+        flex: 1 100%;
+        margin-left: 0;
     }
 
     aside#sidebar ul {
