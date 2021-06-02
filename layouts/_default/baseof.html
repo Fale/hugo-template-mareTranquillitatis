@@ -65,7 +65,19 @@
                 "copyrightHolder": {{ .Site.Author.name }},
                 "copyrightYear": {{ .Date.Format "2006" }},
                 "wordCount": {{ .WordCount }},
-                "keywords": [{{ range $c, $item := .Params.tags }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
+                {{- if .Params.Location }}
+                "contentLocation": {
+                    "@type": "Place",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": {{ .Params.Location.City }},
+                        "addressCountry": {{ .Params.Location.Country }},
+                        "postalCode": {{ .Params.Location.Zip }},
+                        "streetAddress": {{ .Params.Location.Address }}
+                    }
+                },
+                {{- end }}
+                "keywords": [{{ range $c, $item := .Params.tags }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
                 "author": {
                     "@type": "Person",
                     "mainEntityOfPage": {{ .Site.Author.schemaid }},
@@ -75,11 +87,11 @@
                     "birthdate": {{ .Site.Author.birthdate }},
                     "url": {{ .Site.Author.url }},
                     "image": {{ .Site.Author.image | absURL }},
-                    "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
+                    "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
                     "jobTitle": {{ .Site.Author.jobtitle }},
                     "hasOccupation": [
                     {{- range $c, $item := .Site.Author.hasoccupation }}
-                        {{if $c }},{{ end}}{
+                        {{ if $c }},{{ end }}{
                             "@type": "Occupation",
                             "name": {{ $item.Name }},
                             "occupationalCategory": {
