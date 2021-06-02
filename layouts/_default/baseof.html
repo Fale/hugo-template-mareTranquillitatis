@@ -21,12 +21,12 @@
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
-                "@id": {{ .Site.Author.schemaidi }},
+                "@id": {{ .Site.Author.schemaid }},
                 "@type": "Person",
                 "name": {{ .Site.Author.name }},
                 "givenName": {{ .Site.Author.givenname }},
                 "familyName": {{ .Site.Author.familyname }},
-                "birthdate": {{ .Site.Author.birthdate }},
+                "birthDate": {{ .Site.Author.birthdate }},
                 "url": {{ .Site.Author.url }},
                 "image": {{ .Site.Author.image | absURL }},
                 "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
@@ -84,7 +84,7 @@
                     "name": {{ .Site.Author.name }},
                     "givenName": {{ .Site.Author.givenname }},
                     "familyName": {{ .Site.Author.familyname }},
-                    "birthdate": {{ .Site.Author.birthdate }},
+                    "birthDate": {{ .Site.Author.birthdate }},
                     "url": {{ .Site.Author.url }},
                     "image": {{ .Site.Author.image | absURL }},
                     "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
