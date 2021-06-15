@@ -1,5 +1,5 @@
 <article class="card">
-    {{ if .Params.Image }}<img class="cover" src="{{ .Params.Image }}" alt="">{{ end }}
+    {{ if .Params.Image }}<img class="cover" src="{{ .Params.Image }}" alt="" width="728px" height="350px">{{ end }}
     <h1><a href="{{ substr .RelPermalink 0 -1 }}">{{ .Title }}</a></h1>
     <p>
         <span class="fas fa-fw">&#xf017;</span> {{ $.Date.Format "January 2, 2006" }} {{ if .Params.location }} - <span class="fas">&#xf0ac;</span> {{ .Params.location.city }}, {{ .Params.location.country }}{{ end }}
