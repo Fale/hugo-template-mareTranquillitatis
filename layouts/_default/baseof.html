@@ -30,9 +30,10 @@
                 "url": {{ .Site.Author.url }},
                 "image": {{ .Site.Author.image | absURL }},
                 "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
-                "jobTitle": {{ .Site.Author.jobtitle }},
-                "hasOccupation": [
-                {{- range $c, $item := .Site.Author.hasoccupation }}
+                "jobTitle": {{ .Site.Author.jobtitle }}
+                {{- with .Site.Author.hasoccupation }}
+                ,"hasOccupation": [
+                {{- range $c, $item := . }}
                     {{if $c }},{{ end}}{
                         "@type": "Occupation",
                         "name": {{ $item.Name }},
@@ -45,6 +46,7 @@
                     }
                 {{- end }}
                 ]
+                {{- end }}
             }
         </script>
         {{ end }}
@@ -88,9 +90,10 @@
                     "url": {{ .Site.Author.url }},
                     "image": {{ .Site.Author.image | absURL }},
                     "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
-                    "jobTitle": {{ .Site.Author.jobtitle }},
-                    "hasOccupation": [
-                    {{- range $c, $item := .Site.Author.hasoccupation }}
+                    "jobTitle": {{ .Site.Author.jobtitle }}
+                    {{- with .Site.Author.hasoccupation }}
+                    ,"hasOccupation": [
+                    {{- range $c, $item := . }}
                         {{ if $c }},{{ end }}{
                             "@type": "Occupation",
                             "name": {{ $item.Name }},
@@ -103,6 +106,7 @@
                         }
                     {{- end }}
                     ]
+                    {{- end }}
                 }
             }
         </script>
