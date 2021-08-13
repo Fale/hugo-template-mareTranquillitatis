@@ -1,5 +1,5 @@
 {{ define "main" }}
-    {{ range .Pages }}
+    {{ range .Paginator.Pages }}
     {{ .Render "li" }}
     {{ end }}
     {{- if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
