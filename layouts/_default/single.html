@@ -21,10 +21,13 @@
     <aside>
         <section id="share">
             <h2>Share</h2>
-            <a target="_blank" href="http://www.facebook.com/sharer.php?src=bm&u={{ substr .Permalink 0 -1 }}&t={{ .Title }}"><span class="fab fa-fw">&#xf09a;</span></a>
-            <a target="_blank" href="http://twitter.com/intent/tweet?url={{ substr .Permalink 0 -1 }}&text={{ .Title }}&tw_p=tweetbutton"><span class="fab fa-fw">&#xf099;</span></a>
-            <a target="_blank" href="http://getpocket.com/edit?url={{ substr .Permalink 0 -1 }}&title={{ .Title }}"><span class="fab fa-fw">&#xf265;</span></a>
-            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ substr .Permalink 0 -1 }}&title={{ .Title }}"><span class="fab fa-fw">&#xf08c;</span></a>
+            <a target="_blank" href="https://www.facebook.com/sharer.php?src=bm&u={{ substr .Permalink 0 -1 }}&t={{ .Title }}"><span class="fab fa-fw">&#xf082;</span></a>
+            <a target="_blank" href="https://twitter.com/intent/tweet?url={{ substr .Permalink 0 -1 }}&text={{ .Title }}"><span class="fab fa-fw">&#xf081;</span></a>
+            <a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url={{ substr .Permalink 0 -1 }}"><span class="fab fa-fw">&#xf08c;</span></a>
+            <a target="_blank" href="https://www.reddit.com/submit?url={{ substr .Permalink 0 -1 }}&title={{ .Title }}"><span class="fab fa-fw">&#xf1a2;</span></a>
+            <a target="_blank" href="https://news.ycombinator.com/submitlink?u={{ substr .Permalink 0 -1 }}&t={{ .Title }}"><span class="fab fa-fw">&#xf3af;</span></a>
+            <a target="_blank" href="https://share.flipboard.com/bookmarklet/popout?v=2&url={{ substr .Permalink 0 -1 }}&title={{ .Title }}"><span class="fab fa-fw">&#xf44d;</span></a>
+            <a target="_blank" href="mailto:?subject={{ .Title }} - {{ .Site.Title }}&body={{ substr .Permalink 0 -1 }}"><span class="fas fa-fw">&#xf199;</span></a>
         </section>
 
         <section id="see-also">
