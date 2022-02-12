@@ -1,0 +1,11 @@
+name = "Mare Tranquillitatis"
+license = "AGPL-3.0"
+licenselink = "https://github.com/Fale/hugo-template-mareTranquillitatis/blob/master/LICENSE"
+description = "A minimal, performant and responsive theme for Hugo"
+tags = ["blog", "company", "light", "minimal", "mobile", "personal", "responsive", "seo", "syntax highlighting", "technical"]
+features = ["blog", "company", "light", "minimal", "mobile", "personal", "responsive", "seo", "syntax highlighting", "technical"]
+min_version = 0.48
+
+[author]
+    name = "Fabio Alessandro Locati"
+    homepage = "https://fale.io"
