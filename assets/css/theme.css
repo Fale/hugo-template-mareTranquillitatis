@@ -11,36 +11,49 @@
          url('/fonts/Cantarell-Regular.eof') format('embedded-opentype');
 }
 
-@font-face{
-    font-family: 'Font Awesome 5 Brands';
+@font-face {
+    font-family: 'Font Awesome 6 Brands';
     font-style: normal;
     font-weight: 400;
     font-display: fallback;
-    src: local('Font Awesome 5 Brands'),
+    src: local('Font Awesome 6 Brands'),
          url('/fonts/fa-brands-400.woff2') format('woff2'),
-         url('/fonts/fa-brands-400.woff') format('woff'),
-         url('/fonts/fa-brands-400.ttf') format('truetype'),
-         url('/fonts/fa-brands-400.eof') format('embedded-opentype');
+         url('/fonts/fa-brands-400.ttf') format('truetype');
 }
 
 .fab {
-    font-family:"Font Awesome 5 Brands"
+    font-family:"Font Awesome 6 Brands";
+    font-weight: 400;
 }
 
-@font-face{
-    font-family: 'Font Awesome 5 Free';
+
+@font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: local('Font Awesome 6 Free'),
+         url('/fonts/fa-regular-400.woff2') format('woff2'),
+         url('/fonts/fa-regular-400.ttf') format('truetype');
+}
+
+.far {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Free';
     font-style: normal;
     font-weight: 900;
     font-display: fallback;
-    src: local('Font Awesome 5 Free'),
+    src: local('Font Awesome 6 Free'),
          url('/fonts/fa-solid-900.woff2') format('woff2'),
-         url('/fonts/fa-solid-900.woff') format('woff'),
-         url('/fonts/fa-solid-900.ttf') format('truetype'),
-         url('/fonts/fa-solid-900.eof') format('embedded-opentype');
+         url('/fonts/fa-solid-900.ttf') format('truetype');
 }
 
 .fas {
-    font-family: "Font Awesome 5 Free";
+    font-family: 'Font Awesome 6 Free';
     font-weight: 900;
 }
 
