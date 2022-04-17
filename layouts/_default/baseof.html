@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
         <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="canonical" href="{{ with .Params.CanonicalURL }}{{ . }}{{ else }}{{ substr .Permalink 0 -1 }}{{ end }}" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ "index.xml" | absURL }}">
         <style nonce="style">
         {{ with resources.Get "css/theme.css" | minify }}{{ .Content | safeCSS }}{{ end }}
