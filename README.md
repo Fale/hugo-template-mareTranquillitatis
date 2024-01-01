@@ -21,4 +21,4 @@ $ git submodule update --remote themes/mareTranquillitatis
 This theme uses the following fonts:
 
 * Cantarell v0.301 (SIL OFL 1.1) - converted from OTF with [everythingfonts.com](https://everythingfonts.com)
-* FontAwesome v6.4.2 (SIL OFL 1.1)
+* FontAwesome v6.5.1 (SIL OFL 1.1)
