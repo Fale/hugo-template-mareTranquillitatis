@@ -150,7 +150,7 @@
                 <h1>{{ $taxonomyname }}</h1>
                 <ul class="list-group">
                     {{- range $taxonomy }}
-                    <li><a href="{{ substr .Page.RelPermalink 0 -1 }}" title="{{ .Page.Title }}">{{ .Page.Title }}</a></li>
+                    <li><a href="{{ substr .Page.RelPermalink 0 -1 }}">{{ .Page.Title }}</a></li>
                     {{- end }}
                 </ul>
             </div>
