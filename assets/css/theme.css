@@ -253,6 +253,21 @@ main section#comments textarea {
     resize: vertical;
 }
 
+main table {
+    margin: 25px 0;
+}
+
+main table thead tr {
+    background-color: #EEEEEE;
+    text-align: left;
+}
+
+main table th,
+main table td {
+    padding: 8px 15px;
+}
+
+
 /* Sidebar */
 aside#sidebar {
     flex: 1 0px;
