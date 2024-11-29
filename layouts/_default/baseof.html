@@ -22,17 +22,17 @@
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
-                "@id": {{ .Site.Author.schemaid }},
+                "@id": {{ .Site.Params.Author.schemaid }},
                 "@type": "Person",
-                "name": {{ .Site.Author.name }},
-                "givenName": {{ .Site.Author.givenname }},
-                "familyName": {{ .Site.Author.familyname }},
-                "birthDate": {{ .Site.Author.birthdate }},
-                "url": {{ .Site.Author.url }},
-                "image": {{ .Site.Author.image | absURL }},
-                "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
-                "jobTitle": {{ .Site.Author.jobtitle }}
-                {{- with .Site.Author.hasoccupation }}
+                "name": {{ .Site.Params.Author.name }},
+                "givenName": {{ .Site.Params.Author.givenname }},
+                "familyName": {{ .Site.Params.Author.familyname }},
+                "birthDate": {{ .Site.Params.Author.birthdate }},
+                "url": {{ .Site.Params.Author.url }},
+                "image": {{ .Site.Params.Author.image | absURL }},
+                "sameAs": [{{ range $c, $item := .Site.Params.Author.sameas }}{{if $c }}, {{ end}}{{ $item }}{{ end }}],
+                "jobTitle": {{ .Site.Params.Author.jobtitle }}
+                {{- with .Site.Params.Author.hasoccupation }}
                 ,"hasOccupation": [
                 {{- range $c, $item := . }}
                     {{if $c }},{{ end}}{
@@ -65,7 +65,7 @@
                 "url": {{ substr .Permalink 0 -1 }},
                 "image": {{ .Params.Image | absURL }},
                 "inLanguage": {{ .Site.LanguageCode }},
-                "copyrightHolder": {{ .Site.Author.name }},
+                "copyrightHolder": {{ .Site.Params.Author.name }},
                 "copyrightYear": {{ .Date.Format "2006" }},
                 "wordCount": {{ .WordCount }},
                 {{- if .Params.Location }}
@@ -83,16 +83,16 @@
                 "keywords": [{{ range $c, $item := .Params.tags }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
                 "author": {
                     "@type": "Person",
-                    "mainEntityOfPage": {{ .Site.Author.schemaid }},
-                    "name": {{ .Site.Author.name }},
-                    "givenName": {{ .Site.Author.givenname }},
-                    "familyName": {{ .Site.Author.familyname }},
-                    "birthDate": {{ .Site.Author.birthdate }},
-                    "url": {{ .Site.Author.url }},
-                    "image": {{ .Site.Author.image | absURL }},
-                    "sameAs": [{{ range $c, $item := .Site.Author.sameas }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
-                    "jobTitle": {{ .Site.Author.jobtitle }}
-                    {{- with .Site.Author.hasoccupation }}
+                    "mainEntityOfPage": {{ .Site.Params.Author.schemaid }},
+                    "name": {{ .Site.Params.Author.name }},
+                    "givenName": {{ .Site.Params.Author.givenname }},
+                    "familyName": {{ .Site.Params.Author.familyname }},
+                    "birthDate": {{ .Site.Params.Author.birthdate }},
+                    "url": {{ .Site.Params.Author.url }},
+                    "image": {{ .Site.Params.Author.image | absURL }},
+                    "sameAs": [{{ range $c, $item := .Site.Params.Author.sameas }}{{ if $c }}, {{ end }}{{ $item }}{{ end }}],
+                    "jobTitle": {{ .Site.Params.Author.jobtitle }}
+                    {{- with .Site.Params.Author.hasoccupation }}
                     ,"hasOccupation": [
                     {{- range $c, $item := . }}
                         {{ if $c }},{{ end }}{
@@ -159,7 +159,7 @@
         </aside>
         <footer>
             <p>
-                <span id="copyright">&copy;</span> {{ .Site.Params.LaunchYear }}-{{ .Site.LastChange.Year }} {{ .Site.Author.name }}. {{ .Site.Params.Copyright }} <br />
+                <span id="copyright">&copy;</span> {{ .Site.Params.LaunchYear }}-{{ .Site.Lastmod.Year }} {{ .Site.Params.Author.name }}. {{ .Site.Params.Copyright }} <br />
                 <a href="/privacy-policy">Privacy policy</a>
             </p>
         </footer>
