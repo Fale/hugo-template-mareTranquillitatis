@@ -55,7 +55,7 @@
             </form>
             {{ with resources.Get "js/swlcs.js" | resources.ExecuteAsTemplate "swlcs.js" . | minify }}<script nonce="swlcs">{{ .Content | safeJS }}</script>{{ end }}
             <h2>Comments</h2>
-            {{ $comments := index $.Site.Data.comments $resource }}
+            {{ $comments := index hugo.Data.comments $resource }}
             {{ range $comments }}
             <div class="card">
                 <strong>{{ .name }}</strong> on {{ (time .date).Format "2006-01-02 15:04:05 MST" }} said:
