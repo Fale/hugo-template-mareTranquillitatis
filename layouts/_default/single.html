@@ -42,29 +42,40 @@
             {{ end }}
         </section>
 
-        {{ if not (isset .Params "no_comments") }}
-        <section id="comments">
-            {{ $resource := (replace (substr .RelPermalink 1 -1) "/" "_") }}
-            <h2 id="say-something">Say something</h2>
-            <form id="comment">
-                <input type="hidden" id="comment-resource" value="{{ $resource }}">
-                <input type="text" id="comment-name" placeholder="Your name">
-                <input type="email" id="comment-email" placeholder="Your email">
-                <textarea id="comment-body" rows="10" placeholder="Your message. Feel free to use Markdown."></textarea>
-                <span id="comment-submit" class="button">Submit</span>
-            </form>
-            {{ with resources.Get "js/swlcs.js" | resources.ExecuteAsTemplate "swlcs.js" . | minify }}<script nonce="swlcs">{{ .Content | safeJS }}</script>{{ end }}
+        {{ if eq .Section "post" }}
+        {{ $resource := (replace (substr .RelPermalink 1 -1) "/" "_") }}
+        {{ $legacyComments := index hugo.Data.comments $resource }}
+        {{ if or .Params.fediverse $legacyComments }}
+        <section id="fediverse">
             <h2>Comments</h2>
-            {{ $comments := index hugo.Data.comments $resource }}
-            {{ range $comments }}
-            <div class="card">
-                <strong>{{ .name }}</strong> on {{ (time .date).Format "2006-01-02 15:04:05 MST" }} said:
-                <p>{{ .body | $.Site.GetPage.RenderString }}</p>
-            </div>
+            {{ with .Params.fediverse }}
+            <p>To leave a comment, reply to <a href="{{ . }}">this post on the Fediverse</a>.</p>
+            <p>Comments are fetched directly from the Fediverse and are not moderated by the author.</p>
+            <input type="hidden" id="fediverse-url" value="{{ . }}">
+            <input type="hidden" id="fediverse-token" value="{{ $.Site.Params.GtsReadToken }}">
             {{ else }}
-            <p>Nothing yet.</p>
+            <p>Comments are closed for this post.</p>
             {{ end }}
+            <button id="fediverse-load" class="button">Load comments</button>
+            <div id="fediverse-comments"></div>
+            {{ if $legacyComments }}
+            <div id="legacy-comments" hidden>
+                {{ range $legacyComments }}
+                <div class="card">
+                    <strong>{{ .name }}</strong> on {{ (time .date).Format "2006-01-02 15:04:05 MST" }} said:
+                    <p>{{ .body | $.Site.GetPage.RenderString }}</p>
+                </div>
+                {{ end }}
+            </div>
+            {{ end }}
+            {{ with resources.Get "js/fediverse.js" | minify }}<script nonce="fediverse">{{ .Content | safeJS }}</script>{{ end }}
         </section>
+        {{ else }}
+        <section id="fediverse">
+            <h2>Comments</h2>
+            <p>Comments are closed for this post.</p>
+        </section>
+        {{ end }}
         {{ end }}
     </aside>
 </article>
