@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.Language.Locale }}">
     <head>
         <meta charset="utf-8">
         <title>{{ if ne .Page.RelPermalink "/" }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
@@ -11,9 +11,9 @@
         <link rel="canonical" href="{{ with .Params.CanonicalURL }}{{ . }}{{ else }}{{ substr .Permalink 0 -1 }}{{ end }}" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ "index.xml" | absURL }}">
         <style nonce="style">
-        {{ with resources.Get "css/theme.css" | minify }}{{ .Content | safeCSS }}{{ end }}
-        {{ with resources.Get "css/syntax.css" | minify }}{{ .Content | safeCSS }}{{ end }}
-        {{ with resources.Get "css/site.css" | minify }}{{ .Content | safeCSS }}{{ end }}
+        {{ with resources.Get "css/theme.css" | minify }}{{ .Content | safe.CSS }}{{ end }}
+        {{ with resources.Get "css/syntax.css" | minify }}{{ .Content | safe.CSS }}{{ end }}
+        {{ with resources.Get "css/site.css" | minify }}{{ .Content | safe.CSS }}{{ end }}
         </style>
         {{ template "_internal/twitter_cards.html" . }}
         {{ template "_internal/opengraph.html" . }}
@@ -64,7 +64,7 @@
                 "abstract": {{ .Summary }},
                 "url": {{ substr .Permalink 0 -1 }},
                 "image": {{ .Params.Image | absURL }},
-                "inLanguage": {{ .Site.LanguageCode }},
+                "inLanguage": {{ .Site.Language.Locale }},
                 "copyrightHolder": {{ .Site.Params.Author.name }},
                 "copyrightYear": {{ .Date.Format "2006" }},
                 "wordCount": {{ .WordCount }},
@@ -163,6 +163,6 @@
                 <a href="/privacy-policy">Privacy policy</a>
             </p>
         </footer>
-        {{ with resources.Get "js/mobile.js" | resources.ExecuteAsTemplate "mobile.js" . | minify }}<script nonce="js">{{ .Content | safeJS }}</script>{{ end }}
+        {{ with resources.Get "js/mobile.js" | resources.ExecuteAsTemplate "mobile.js" . | minify }}<script nonce="js">{{ .Content | safe.JS }}</script>{{ end }}
     </body>
 </html>

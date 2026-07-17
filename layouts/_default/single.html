@@ -68,7 +68,7 @@
                 {{ end }}
             </div>
             {{ end }}
-            {{ with resources.Get "js/fediverse.js" | minify }}<script nonce="fediverse">{{ .Content | safeJS }}</script>{{ end }}
+            {{ with resources.Get "js/fediverse.js" | minify }}<script nonce="fediverse">{{ .Content | safe.JS }}</script>{{ end }}
         </section>
         {{ else }}
         <section id="fediverse">
