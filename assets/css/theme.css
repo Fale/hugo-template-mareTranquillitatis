@@ -65,6 +65,39 @@
 
 html {
     padding: 0 20px;
+    color-scheme: light dark;
+}
+
+:root {
+    --page-background: #EEEEEE;
+    --surface-background: #FFFFFF;
+    --code-background: #F8F8F8;
+    --text-color: #212529;
+    --muted-text-color: #555555;
+    --link-color: #0056B3;
+    --link-hover-color: #004494;
+    --focus-color: #003D80;
+    --button-text-color: #FFFFFF;
+    --border-color: rgba(0, 0, 0, .125);
+    --control-border-color: #DED4DA;
+    --inline-code-color: #A70054;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --page-background: #181A1B;
+        --surface-background: #242729;
+        --code-background: #1D2021;
+        --text-color: #E8E6E3;
+        --muted-text-color: #B8B5B1;
+        --link-color: #6EA8FE;
+        --link-hover-color: #9EC1FF;
+        --focus-color: #FFCC66;
+        --button-text-color: #101214;
+        --border-color: rgba(255, 255, 255, .18);
+        --control-border-color: #565D61;
+        --inline-code-color: #FF8FC1;
+    }
 }
 
 /* Generic */
@@ -72,8 +105,8 @@ body {
     width: 100%;
     max-width: 1110px;
     margin: 20px auto 20px auto;
-    background: #EEEEEE;
-    color: #212529;
+    background: var(--page-background);
+    color: var(--text-color);
     text-align: left;
     font-family: 'Cantarell', sans-serif;
     font-size: 1rem;
@@ -84,13 +117,18 @@ body {
 }
 
 a {
-    color: #0056B3;
+    color: var(--link-color);
     text-decoration: none;
 }
 
 a:hover {
-    color: #007BFF;
+    color: var(--link-hover-color);
     text-decoration: underline;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
 }
 
 .button {
@@ -99,15 +137,15 @@ a:hover {
     vertical-align: middle;
     padding: 0.375rem 0.75rem;
     border-radius: 0.25rem;
-    color: #FFFFFF;
-    background-color: #0056B3;
-    border: 2px solid #0056B3;
+    color: var(--button-text-color);
+    background-color: var(--link-color);
+    border: 2px solid var(--link-color);
     cursor: pointer;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 a.button:hover {
-    color: #FFFFFF;
+    color: var(--button-text-color);
     text-decoration: none;
 }
 
@@ -120,8 +158,8 @@ a.button:hover {
 
 .card {
     overflow: auto;
-    background-color: #FFFFFF;
-    border: 1px solid rgba(0,0,0,.125);
+    background-color: var(--surface-background);
+    border: 1px solid var(--border-color);
     border-radius: .25rem;
     padding: 20px;
     margin: 10px 0 20px 0;
@@ -130,7 +168,7 @@ a.button:hover {
 /* Navbar */
 header {
     flex: 1 100%;
-    background-color: #FFFFFF;
+    background-color: var(--surface-background);
     padding: 10px 15px;
     margin-bottom: 10px;
     display: flex;
@@ -147,7 +185,7 @@ header img.avatar {
 
 header #brand {
     display: inline-block;
-    color: #212529;
+    color: var(--text-color);
     white-space: normal;
     font-size: 1.25rem;
     padding-top: 0.3125rem;
@@ -157,8 +195,8 @@ header #brand {
 header span#nav-toggler {
     display: none;
     padding: .3rem .4rem;
-    color: #CCCCCC;
-    border: 1px solid #DED4DA;
+    color: var(--muted-text-color);
+    border: 1px solid var(--control-border-color);
     border-radius: .25rem;
     cursor: pointer;
 }
@@ -171,13 +209,13 @@ header nav a {
     float: left;
     display: block;
     padding: 0.2rem .5rem 0 .5rem;
-    color: #555555;
+    color: var(--muted-text-color);
 }
 
 header a.active,
 header a:hover {
     text-decoration: none;
-    color: #212529;
+    color: var(--text-color);
 }
 
 /* Content */
@@ -209,14 +247,14 @@ main p {
 
 main code {
     font-size: 87.5%;
-    color: #E83E8C;
+    color: var(--inline-code-color);
     word-break: break-word;
 }
 
 main pre {
     padding: 5px;
     overflow: auto;
-    background-color: #F8F8F8 !important;
+    background-color: var(--code-background) !important;
 }
 
 main pre code {
@@ -259,13 +297,13 @@ main section#share a {
 }
 
 .fediverse-handle {
-    color: #555555;
+    color: var(--muted-text-color);
     font-size: 0.875rem;
 }
 
 .fediverse-date {
     font-size: 0.875rem;
-    color: #555555;
+    color: var(--muted-text-color);
     white-space: nowrap;
 }
 
@@ -282,7 +320,7 @@ main table {
 }
 
 main table thead tr {
-    background-color: #EEEEEE;
+    background-color: var(--page-background);
     text-align: left;
 }
 
@@ -340,7 +378,7 @@ footer p {
     header nav a {
         width: calc(100% - 40px);
         padding: 12px 20px !important;
-        border-top: 1px solid #DED4DA;
+        border-top: 1px solid var(--control-border-color);
     }
 
     main {
@@ -361,7 +399,7 @@ footer p {
     aside#sidebar a {
         display: block;
         padding: .75rem 1.25rem;
-        border-top: 1px solid rgba(0,0,0,.125);
+        border-top: 1px solid var(--border-color);
     }
 
 }
